@@ -3,7 +3,8 @@ from flask import (
 )
 from flask_cors import CORS
 from http import HTTPStatus
-from utils.course_utils import get_courses_by_subject
+from utils.course_utils import get_courses_by_subject, get_cached_courses
+
 
 app = Flask(__name__)
 app.debug = True
@@ -18,11 +19,21 @@ def hello_world():
 def get_subject_courses(subject):
   if request.method == "OPTIONS":
         return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
-  response, code = "", -1
   subject_courses = get_courses_by_subject("CS")
   subject_courses = jsonify(subject_courses)
-  code = HTTPStatus.OK
-  return make_response(subject_courses), code
+  return make_response(subject_courses, HTTPStatus.OK)
+
+@app.route("/ai-schedule-builder/api/get/questions", methods=["GET","POST"])
+def get_questions():
+  if request.method == "OPTIONS":
+    return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
+  if not request.json["taken_courses"] or not request.json["major"]:
+     return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
+  taken_courses = request.json["taken_courses"]
+  courses = get_cached_courses(request.json["major"])
+  #ruchis function here
+  questions = 'temp'
+  return make_response(jsonify(questions), HTTPStatus.OK)
 
 if __name__ == "__main__":
   app.run(debug=True, port=5000)

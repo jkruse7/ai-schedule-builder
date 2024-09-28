@@ -6,6 +6,11 @@ from pittapi import course
 
 major_courses_cache = {}
 
+def get_cached_courses(major):
+    if major in major_courses_cache:
+      return major_courses_cache[major]
+    return []
+
 def get_courses_by_subject(major: str):
     if major in major_courses_cache:
       # print(major_courses_cache[major]a)
