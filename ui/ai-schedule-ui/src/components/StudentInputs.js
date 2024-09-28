@@ -1,18 +1,30 @@
 import React from "react";
 import { useState } from "react";
 
-function StudentInputs() {
+function StudentInputs({ setCourses }) {
   const [major, setMajor] = useState("");
-  const [majorError, setMajorError] = useState(null);
   const [semsLeft, setSemsLeft] = useState("");
-  const [semsError, setSemsError] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`http://localhost:5000/ai-schedule-builder/api/courses/get/${major}`, {
-      method: 'POST',
-      
-    })
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Origin': 'http://localhost:3000',
+      }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(`Unable to retrieve courses for ${major}`);
+      }
+      return response.json();
+    }).then(data => {
+      console.warn(data);
+    }).catch(error => {
+      console.warn(error);
+      setError(error.message)
+    });
   };
 
   const resetInputs = (e) => {
@@ -30,7 +42,6 @@ function StudentInputs() {
             onChange={(e) => setMajor(e.target.value)}
           />
         </label>
-        {majorError !== null && <label>Error: {majorError}</label>}
         <label>How many semesters do you have left?
           <input
             type="number"
@@ -38,8 +49,8 @@ function StudentInputs() {
             onChange={(e) => setSemsLeft(e.target.value)}
           />
         </label>
-        {semsError !== null && <label>Error: {semsError}</label>}
         <button type="submit">Submit</button>
+        {error !== null && <label>Error: {error}</label>}
       </form>
       <button onClick={resetInputs}>Reset Inputs</button>
     </div>
