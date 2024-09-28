@@ -23,6 +23,7 @@ function StudentInputs({ setCourses }) {
     }).then(data => {
       setError(null);
       setCourses(data);
+      console.warn(data);
     }).catch(error => {
       console.error("you fool");
       console.error(error);

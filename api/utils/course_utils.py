@@ -4,15 +4,15 @@ from typing import List
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'PittAPI'))
 from pittapi import course
 
-# cs_subject = course.get_subject_courses(subject='CS')
-# courses_dict = cs_subject.courses # subject code, dictionary of courses
+major_courses_cache = {}
 
-# parsed_courses = filtered_courses(courses_dict)
-# print(parsed_courses)
-
-def get_courses_by_subject(subject: str):
-    cs_subject = course.get_subject_courses(subject)
-    return format_courses(cs_subject.courses)
+def get_courses_by_subject(major: str):
+    if major in major_courses_cache:
+      # print(major_courses_cache[major]a)
+      return major_courses_cache[major]
+    major_courses = course.get_subject_courses(major)
+    major_courses_cache[major] = major_courses
+    return format_courses(major_courses.courses)
 
 def format_courses(courses:dict[str, course.Course]) -> dict:
     formatted = []

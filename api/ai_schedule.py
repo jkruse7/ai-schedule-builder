@@ -20,8 +20,7 @@ def get_subject_courses(subject):
         return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
   response, code = "", -1
   subject_courses = get_courses_by_subject("CS")
-  print("hello")
-  print(subject_courses)
+  subject_courses = jsonify(subject_courses)
   code = HTTPStatus.OK
   return make_response(subject_courses), code
 
