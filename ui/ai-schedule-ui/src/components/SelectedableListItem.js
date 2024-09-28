@@ -1,20 +1,23 @@
 import React from "react";
 import { useState } from "react";
 
-function SelectableListItem({ course, selectedCourses }) {
+function SelectableListItem({ course, selectedCourses, setSelectedCourses }) {
 
   const [added, setAdded] = useState(false);
 
   const addToList = () => {
+    const currentSelect = selectedCourses;
     if (added === true) {
-      const idx = selectedCourses.indexOf(course);
+      const idx = currentSelect.indexOf(course);
       if (idx > -1) {
-        selectedCourses.splice(idx, 1);
+        currentSelect.splice(idx, 1);
       }
     }
     else {
-      selectedCourses.push(course);
+      currentSelect.push(course);
     }
+    console.warn(setSelectedCourses);
+    setSelectedCourses(currentSelect);
     setAdded(!added);
     console.warn(selectedCourses);
   };

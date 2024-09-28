@@ -7,12 +7,15 @@ import CoursesList from './components/CoursesList';
 function App() {
 
   const [courses, setCourses] = useState([]);
-  const selectedCourses = [];
+  const [selectedCourses, setSelectedCourses] = useState([]);
+  // const selectedCourses = [];
 
   return (
     <div>
        <StudentInputs setCourses={setCourses} selectedCourse={selectedCourses}/>
-       {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses}/>}
+       {selectedCourses.length != 0 && <button>Submit</button>}
+       {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
+       
     </div>
   );
 }

@@ -10,7 +10,7 @@ function CoursesList({ courses, selectedCourses, setSelectedCourses }) {
 
   return (
     <ul>
-      {courses.map(course => <SelectableListItem course={course} selectedCourses={selectedCourses}/>)}
+      {courses.map(course => <SelectableListItem course={course} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>)}
     </ul>
   );
 }
