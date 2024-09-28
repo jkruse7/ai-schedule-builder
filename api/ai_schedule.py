@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_cors import CORS
 from http import HTTPStatus
-from utils.course_utils import get_courses_by_subject, get_cached_courses
+from utils.course_utils import get_courses_by_subject, get_cached_courses, ask_gemini_to_generate_questions
 import json
 
 
@@ -32,9 +32,10 @@ def get_questions():
   if not request.json["taken_courses"] or not request.json["major"]:
      return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
   taken_courses = request.json["taken_courses"]
+  print(type(taken_courses))
   courses = get_cached_courses(request.json["major"])
-  #ruchis function here
-  questions = 'temp'
+  print(type(courses))
+  questions = ask_gemini_to_generate_questions(courses, taken_courses)
   return make_response(jsonify(questions), HTTPStatus.OK)
 
 if __name__ == "__main__":
