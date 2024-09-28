@@ -1,0 +1,3 @@
+[submodule "PittAPI"]
+	path = PittAPI
+	url = https://github.com/pittcsc/PittAPI.git
