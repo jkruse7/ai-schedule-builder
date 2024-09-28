@@ -9,6 +9,10 @@ function StudentInputs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch(`http://localhost:5000/ai-schedule-builder/api/courses/get/${major}`, {
+      method: 'POST',
+      
+    })
   };
 
   const resetInputs = (e) => {
