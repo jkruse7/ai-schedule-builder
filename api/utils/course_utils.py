@@ -13,11 +13,12 @@ def get_cached_courses(major):
 
 def get_courses_by_subject(major: str):
     if major in major_courses_cache:
-      # print(major_courses_cache[major]a)
+    #   # print(major_courses_cache[major]a
       return major_courses_cache[major]
     major_courses = course.get_subject_courses(major)
-    major_courses_cache[major] = major_courses
-    return format_courses(major_courses.courses)
+    formatted = format_courses(major_courses.courses)
+    major_courses_cache[major] = formatted
+    return formatted
 
 def format_courses(courses:dict[str, course.Course]) -> dict:
     formatted = []

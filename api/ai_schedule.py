@@ -4,6 +4,7 @@ from flask import (
 from flask_cors import CORS
 from http import HTTPStatus
 from utils.course_utils import get_courses_by_subject, get_cached_courses
+import json
 
 
 app = Flask(__name__)
@@ -19,7 +20,8 @@ def hello_world():
 def get_subject_courses(subject):
   if request.method == "OPTIONS":
         return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
-  subject_courses = get_courses_by_subject("CS")
+  subject_courses = get_courses_by_subject(subject)
+  # print(subject_courses)
   subject_courses = jsonify(subject_courses)
   return make_response(subject_courses, HTTPStatus.OK)
 

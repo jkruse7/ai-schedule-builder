@@ -1,10 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function StudentInputs({ setCourses }) {
+function StudentInputs({ setCourses, selectedCourses }) {
   const [major, setMajor] = useState("");
   const [semsLeft, setSemsLeft] = useState("");
   const [error, setError] = useState(null);
+
+  const prevMajor = useRef("");
+  const prevSemsLeft = useRef("");
+
+  useEffect(() => {
+    prevMajor.current = major;
+    prevSemsLeft.current = semsLeft;
+  }, [major, semsLeft]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +42,8 @@ function StudentInputs({ setCourses }) {
   const resetInputs = (e) => {
     setMajor("");
     setSemsLeft("");
+    setCourses([]);
+    selectedCourses = [];
   };
 
   return (

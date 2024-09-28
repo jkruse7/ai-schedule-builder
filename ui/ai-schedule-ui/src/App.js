@@ -7,11 +7,12 @@ import CoursesList from './components/CoursesList';
 function App() {
 
   const [courses, setCourses] = useState([]);
+  const selectedCourses = [];
 
   return (
     <div>
-       <StudentInputs setCourses={setCourses}/>
-       {courses.legnth > 0 && <CoursesList courses={courses}/>}
+       <StudentInputs setCourses={setCourses} selectedCourse={selectedCourses}/>
+       {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses}/>}
     </div>
   );
 }
