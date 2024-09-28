@@ -11,7 +11,7 @@ from pittapi import course
 # print(parsed_courses)
 import os
 import google.generativeai as genai
-import rmp_test_code
+import rmp_code
 
 genai.configure(api_key="AIzaSyCgKFCeZ3CUrb62iwvzwdmw-v5pv5ylSpg")
 
@@ -82,13 +82,17 @@ if __name__ == "__main__":
             all.append(c)
 
     #print(all)
-    response = ask_gemini_to_generate_questions(all, courses_taken)
+    #response = ask_gemini_to_generate_questions(all, courses_taken)
     answers = ["yes", "no", "yes", "no", "no"]
     #print(answers)
-    ask_gemini_for_recs(answers, response, all, courses_taken)
+    #ask_gemini_for_recs(answers, response, all, courses_taken)
 
     # depending on what they select, we call pitt api with those classes to find professor
-    
+    classes_selected = {"subject_code": "CS", "course_number": "1571", "course_id": "105780", "course_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE", "course_key": "1571"}, {"subject_code": "CS", "course_number": "1613", "course_id": "194137", "course_title": "QUANTUM COMPUTATION", "course_key": "1613"}, {"subject_code": "CS", "course_number": "1621", "course_id": "105785", "course_title": "STRUCTURE PROGRAMMING LANGUAGES", "course_key": "1621"}
+
+    for classes in classes_selected:
+        course._get_course_sections(classes["course_id"], "2234")
+
 
     # then with the professor names as a list we call the get difficulty average method
     #print(cool[0])
