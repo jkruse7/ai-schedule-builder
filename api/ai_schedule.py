@@ -3,6 +3,7 @@ from flask import (
 )
 from flask_cors import CORS
 from http import HTTPStatus
+from utils.course_utils import get_courses_by_subject
 
 app = Flask(__name__)
 app.debug = True
@@ -17,21 +18,12 @@ def hello_world():
 def get_subject_courses(subject):
   if request.method == "OPTIONS":
         return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
-  print(subject)
   response, code = "", -1
-  course1 = { 
-    "subject": "CS", 
-    "couse_code": "0007",
-    "course_name": "Introduction to Computer Programming"
-  };
-  course2 = { 
-    "subject": "CS", 
-    "couse_code": "1550",
-    "course_name": "Introduction to Operating Systems"
-  };
-  response = jsonify(course1, course2)
+  subject_courses = get_courses_by_subject("CS")
+  print("hello")
+  print(subject_courses)
   code = HTTPStatus.OK
-  return make_response(response), code
+  return make_response(subject_courses), code
 
 if __name__ == "__main__":
   app.run(debug=True, port=5000)

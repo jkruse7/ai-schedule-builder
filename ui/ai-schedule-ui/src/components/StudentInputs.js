@@ -15,14 +15,17 @@ function StudentInputs({ setCourses }) {
         'Origin': 'http://localhost:3000',
       }
     }).then(response => {
+      console.warn(response);
       if (!response.ok) {
         throw new Error(`Unable to retrieve courses for ${major}`);
       }
       return response.json();
     }).then(data => {
-      console.warn(data);
+      setError(null);
+      setCourses(data);
     }).catch(error => {
-      console.warn(error);
+      console.error("you fool");
+      console.error(error);
       setError(error.message)
     });
   };

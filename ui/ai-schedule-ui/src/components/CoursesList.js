@@ -3,6 +3,8 @@ import { useState } from "react";
 
 function CoursesList({ courses }) {
 
+  console.log("here");
+
   const createCourseListItems = (course) => {
     return (
       <li>
