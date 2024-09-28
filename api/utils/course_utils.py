@@ -11,9 +11,11 @@ from pittapi import course
 # print(parsed_courses)
 import os
 import google.generativeai as genai
-import rmp_code
+import utils.rmp_code
 
 genai.configure(api_key="AIzaSyCgKFCeZ3CUrb62iwvzwdmw-v5pv5ylSpg")
+
+major_courses_cache = {}
 
 # Create the model
 generation_config = {
@@ -52,9 +54,19 @@ def ask_gemini_for_recs(answers:List[str], response: str, class_list: dict[str, 
     print(response.text)
     return response.text
 
-def get_courses_by_subject(subject: str):
-    cs_subject = course.get_subject_courses(subject)
-    return format_courses(cs_subject.courses)
+def get_cached_courses(major):
+    if major in major_courses_cache:
+      return major_courses_cache[major]
+    return []
+
+def get_courses_by_subject(major: str):
+    if major in major_courses_cache:
+    #   # print(major_courses_cache[major]a
+      return major_courses_cache[major]
+    major_courses = course.get_subject_courses(major)
+    formatted = format_courses(major_courses.courses)
+    major_courses_cache[major] = formatted
+    return formatted
 
 def format_courses(courses:dict[str, course.Course]) -> dict:
     formatted = []

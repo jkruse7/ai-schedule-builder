@@ -20,6 +20,7 @@ function SelectableListItem({ course, selectedCourses, setSelectedCourses }) {
     setSelectedCourses(currentSelect);
     setAdded(!added);
     console.warn(selectedCourses);
+    console.warn(selectedCourses.length);
   };
   
   return (
