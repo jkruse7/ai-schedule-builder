@@ -6,21 +6,14 @@ function SelectableListItem({ course, selectedCourses, setSelectedCourses }) {
   const [added, setAdded] = useState(false);
 
   const addToList = () => {
-    const currentSelect = selectedCourses;
-    if (added === true) {
-      const idx = currentSelect.indexOf(course);
-      if (idx > -1) {
-        currentSelect.splice(idx, 1);
-      }
-    }
-    else {
+    let currentSelect = [...selectedCourses];
+    if (added) {
+      currentSelect = currentSelect.filter(item => item !== course);
+    } else {
       currentSelect.push(course);
     }
-    console.warn(setSelectedCourses);
     setSelectedCourses(currentSelect);
     setAdded(!added);
-    console.warn(selectedCourses);
-    console.warn(selectedCourses.length);
   };
   
   return (
