@@ -40,7 +40,7 @@ def get_questions():
   questions = ask_gemini_to_generate_questions(courses, taken_courses)
   return make_response(jsonify(questions), HTTPStatus.OK)
 
-@app.route("/ai-schedule-builder/api/get/recommendations", methods = ["GET", "POST"])
+@app.route("/ai-schedule-builder/api/get/recommendations", methods=["POST"])
 def get_recommendations():
    if request.method == "OPTIONS":
     return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
@@ -54,6 +54,8 @@ def get_recommendations():
    class_list = request.json["class_list"]
    taken_courses = request.json["taken_courses"]
    recommendations = ask_gemini_for_recs(answers, full_questions, class_list, taken_courses)
+   print('ayo')
+   print(recommendations)
    return make_response(jsonify(recommendations), HTTPStatus.OK)
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import StudentInputs from './components/StudentInputs';
 import CoursesList from './components/CoursesList';
 import QuestionsDisplay from './components/QuestionsDisplay';
+import CourseRecommendations from './components/CourseRecommendations';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
   else if (curScreen === "COURSES") {
     return (
       <div>
-        
+        <CourseRecommendations answers={answers} courses={courses} selectedCourses={selectedCourses}/>
       </div>
     );
   }

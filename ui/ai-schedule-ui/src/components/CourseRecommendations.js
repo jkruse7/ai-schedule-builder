@@ -10,7 +10,7 @@ function CourseRecommendations({ answers, courses, selectedCourses }) {
             taken_courses: selectedCourses
         });
         fetch("http://localhost:5000/ai-schedule-builder/api/get/recommendations", {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Origin': 'http://localhost:3000',
@@ -24,7 +24,7 @@ function CourseRecommendations({ answers, courses, selectedCourses }) {
         }).then(data => {
             console.warn(data);
         }).catch(error => {
-            console.error(data);
+            console.error(error);
         });
 
     }, [answers]);
