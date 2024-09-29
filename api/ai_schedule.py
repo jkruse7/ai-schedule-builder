@@ -31,10 +31,12 @@ def get_questions():
     return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
   if not request.json["taken_courses"] or not request.json["major"]:
      return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
+  print("whats up big dawg")
   taken_courses = request.json["taken_courses"]
   print(type(taken_courses))
   courses = get_cached_courses(request.json["major"])
   print(type(courses))
+
   questions = ask_gemini_to_generate_questions(courses, taken_courses)
   return make_response(jsonify(questions), HTTPStatus.OK)
 

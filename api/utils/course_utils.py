@@ -41,7 +41,7 @@ chat_session = model.start_chat(
 def ask_gemini_to_generate_questions(all_courses: dict[str, str], courses_taken:dict[str, str]):
     total_courses = str(all_courses) # convert to string all classes
     taken = str(courses_taken) # convert to string courses taken
-    response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes?") # sending in classes already taken, course details, as a string
+    response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes? FOr your response, return each question in plain text, with a new line in between each question.") # sending in classes already taken, course details, as a string
     print(response.text)
     return response.text
 
