@@ -130,6 +130,11 @@ button:hover {
   display: flex;
   justify-content: center;
 }
+.classlist-item {
+  list-style-type: none;
+  border-width: 1px;
+  border-radius: 5px;
+}
 .home-input{
   font-size: 18px;
 }

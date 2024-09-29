@@ -17,7 +17,7 @@ function SelectableListItem({ course, selectedCourses, setSelectedCourses }) {
   };
   
   return (
-    <li>
+    <li className="classlist-item">
         <input
             type="checkbox"
             onChange={() => addToList()}
