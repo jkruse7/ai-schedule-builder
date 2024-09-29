@@ -44,7 +44,7 @@ def ask_gemini_to_generate_questions(all_courses: dict[str, str], courses_taken:
     if taken in questions_cache:
         return questions_cache[taken]
     total_courses = str(all_courses) # convert to string all classes
-    response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes? FOr your response, return each question in plain text, with a new line in between each question.") # sending in classes already taken, course details, as a string
+    response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes? For your response, return each question in plain text, with a new line in between each question.") # sending in classes already taken, course details, as a string
     questions_cache[taken] = response.text
     print(response.text)
     return response.text
@@ -56,7 +56,7 @@ def ask_gemini_for_recs(answers:List[str], response: str, class_list: dict[str, 
         full += s + " , "
     if (response + full) in recommendations_cache:
         return recommendations_cache[response + full]
-    gemini_response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take in the format 'CS 0007 Introduction to Computer Programming' /n 'CS 401 Intermediate Programming'?")
+    gemini_response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take? Return only the class names in the format 'CS 0007 Introduction to Computer Programming', with each class seperated by a new line. Do not return any text besides the classes and limit your recomendations to 10 classes.")
     recommendations_cache[response + full] = gemini_response.text
     print(gemini_response.text)
     return gemini_response.text

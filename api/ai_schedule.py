@@ -42,7 +42,6 @@ def get_questions():
 
 @app.route("/ai-schedule-builder/api/get/recommendations", methods=["POST"])
 def get_recommendations():
-   print("mogdo")
    if request.method == "OPTIONS":
     return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
    if not request.json["taken_courses"] or not request.json["class_list"] or not request.json["q_and_a"]:

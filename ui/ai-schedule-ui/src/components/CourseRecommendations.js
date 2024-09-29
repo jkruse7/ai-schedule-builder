@@ -24,7 +24,8 @@ function CourseRecommendations({ answers, courses, selectedCourses, setSelectedR
             return response.json();
         }).then(data => {
             console.warn(data);
-            setRecomendations(data);
+            const recsArray = data.trim().split("\n");
+            setRecomendations(recsArray);
         }).catch(error => {
             console.error(error);
         });
@@ -54,17 +55,15 @@ function CourseRecommendations({ answers, courses, selectedCourses, setSelectedR
                         <ul>
                             {recomendations.map(curR => {
                                 return (
-                                    <li key={curR}>
-                                        <div> 
-                                            <input
-                                                type="checkbox"
-                                                name={curR}
-                                                value={curR}
-                                                onChange={() => handleChange(curR)}
-                                            />
-                                            <label>{curR}</label>
-                                        </div>
-                                    </li>
+                                    <div> 
+                                        <input
+                                            type="checkbox"
+                                            name={curR}
+                                            value={curR}
+                                            onChange={() => handleChange(curR)}
+                                        />
+                                        <label>{curR}</label>
+                                    </div>
                                 )
                             })}
                         </ul>
