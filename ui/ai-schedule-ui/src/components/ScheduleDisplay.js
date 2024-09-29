@@ -1,8 +1,36 @@
 import React, { useEffect, useState }  from "react";
+import "../App.css";
 
 function ScheduleDisplay({ selectedRecs, semsLeft }) {
 
   const [schedule, setSchedule] = useState([]);
+
+  const formatSchedule = (curSchedule) => {
+
+    const groupedSchedule = curSchedule.reduce((acc, line) => {
+      const linePieces = line.split(';');
+      const key = linePieces[0];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(linePieces);
+      return acc;
+    }, {});
+
+    return Object.keys(groupedSchedule).map((key, index) => (
+      <div key={index} className="grid-card">
+        <h3>{key}</h3>
+        {groupedSchedule[key].map((linePieces, subIndex) => (
+          <div key={subIndex}>
+            <h5>{linePieces[1]}</h5>
+            <div>
+              <span>{linePieces[2]}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    ));
+  };
 
   useEffect(() => {
     const scheduleBody = JSON.stringify({
@@ -22,28 +50,27 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
       }
       return response.json();
     }).then(data => {
-        console.warn(data);
-        console.warn(typeof data);
-        data.trim().split("\n").forEach(sem => schedule.push(sem));
-        console.warn(schedule);
+      console.warn("unfort");
+      console.warn(data.trim().split("\n"));
+      setSchedule(data.trim().split("\n"));
     }).catch(error => {
         console.error(error);
     });
-
   }, [selectedRecs])
 
   return (
-    <div>
-      {schedule.length === 0
-        ? <label>Loading...</label>
-        : (
-          <div>
-            {schedule.map(cur => {
-              <div>{cur}</div>
-            })}
-          </div>
-        )
-      }
+    <div className="schedule-container">
+      <div className="schedule-header">
+        <h2>Here's my recommendations!</h2>
+      </div>
+      <div className="schedule-grid-conrainer">
+        {schedule.length === 0
+          ? <label>Loading...</label>
+          : (
+            <div className="schedule-grid">{formatSchedule(schedule)}</div>
+          )
+        }
+      </div>
     </div>
   );
 }

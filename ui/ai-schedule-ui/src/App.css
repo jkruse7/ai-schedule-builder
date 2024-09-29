@@ -1,50 +1,86 @@
-.main-container {
-  
+.App {
+  text-align: center;
 }
-.header{
- text-align: center;
-}
-.questions{
 
-  padding-left: 40%;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
-.special-side {
-  text-align: left;
-  padding-left: 20%;
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
-h2:after {
-  display: inline-block;
-  content: "";
-  height: 2px;
-  background: black;
-  width: 70%;
-  margin-left: 5px;
-  margin-top: 8px;
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
-.submit-btn{
-  background-color: #FFD700; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  box-shadow: 5px 10px #888888;
-  border-radius: 10px;
+
+.App-link {
+  color: #61dafb;
 }
-.reset-btn{
-  background-color: #FFD700; /* Green */
-  border: none;
-  color: black;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  box-shadow: 5px 10px #888888;
-  border-radius: 10px;
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-button:hover {
-  background-color: #d4af37;
+.app-header {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  background: royalblue;
+  img {
+    padding-left: .1em;
+    padding-right: 2em;
+    max-width: 10%;
+    max-height: 10%;
+  }
+  .app-header-title {
+    color: white;
+    font-size: xx-large;
+  }
+  .app-header-spacing {
+    padding-bottom: 5em;
+  }
+}
+
+.schedule-header {
+  display: inline;
+  padding: 4px;
+  padding-left: 4%;
+  justify-content: center;
+}
+
+.schedule-grid-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+  padding-left: 4%;
+  padding-right: 4%;
+  box-shadow: #e7e7e7;
+}
+
+.grid-card {
+  border: 2px solid #e7e7e7;
+  border-radius: 4px;
+  padding: .5rem;
 }

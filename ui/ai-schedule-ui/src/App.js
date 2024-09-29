@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './assets/al-logo.png';
 import React from 'react';
 import { useState } from 'react';
 import StudentInputs from './components/StudentInputs';
@@ -37,6 +38,9 @@ function App() {
   else if (curScreen === "SCHEDULE") {
     return (
       <div>
+        <header className='app-header'>
+          <img src={logo}/>
+        </header>
         <ScheduleDisplay
           selectedRecs={selectedRecs}
           semsLeft={semsLeft}
@@ -56,6 +60,10 @@ function App() {
        
        </div>
        <div className='questions'>
+      <header className='app-header'>
+        <img src={logo}/>
+        <h1 className='app-header-title'>AL-Genda</h1>
+      </header>
        <StudentInputs 
         setCourses={setCourses}
         selectedCourse={selectedCourses}
