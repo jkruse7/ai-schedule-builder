@@ -6,6 +6,7 @@ from pittapi import course
 import os
 import google.generativeai as genai
 from pymongo import MongoClient
+from rmp_code import get_prof_difficulty_average
 
 # Replace <connection_string> with your MongoDB connection string
 client = MongoClient("mongodb+srv://ruh32:MUKYGIasKz8Bc4rn@aischedulebuilder.hfmwv.mongodb.net/?retryWrites=true&w=majority&appName=AIScheduleBuilder")
@@ -74,9 +75,9 @@ def get_average_difficulty(classes_selected: dict): # hella slow.
                 for instructor in res['instructors']:
                     full_list.append(instructor['name'])
                 
-            average_list[res['catalog_nbr']] = rmp_code.get_prof_difficulty_average(full_list)
+            average_list[res['catalog_nbr']] = get_prof_difficulty_average(full_list)
 
-        except:
+        except Exception as e:
             continue
     
     print(average_list)
@@ -84,7 +85,8 @@ def get_average_difficulty(classes_selected: dict): # hella slow.
 
 def get_following_classes(sems_left: str, classes_I_want: dict):
     average = get_average_difficulty(classes_I_want)
-    response = chat_session.send_message("I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take when to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it.")
+    print(average)
+    response = chat_session.send_message("You are a college counselor. I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it. Your response should be formated as plain text with the semester and a semicolon, class and a semicolon, and explanation.")
     print(response.text)
     return response.text
 
@@ -138,6 +140,7 @@ if __name__ == "__main__":
     classes_selected = {"subject_code": "CS", "course_number": "1571", "course_id": "105780", "course_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE", "course_key": "1571"}, {"subject_code": "CS", "course_number": "1613", "course_id": "194137", "course_title": "QUANTUM COMPUTATION", "course_key": "1613"}, {"subject_code": "CS", "course_number": "1621", "course_id": "105785", "course_title": "STRUCTURE PROGRAMMING LANGUAGES", "course_key": "1621"}, {"subject_code": "CS", "course_number": "0007", "course_id": "105611", "course_title": "INTRODUCTION TO COMPUTER PROGRAMMING", "course_key": "0007"}
 
 
-    #get_following_classes("2", classes_selected)
+    get_following_classes("2", classes_selected)
     
     #print(cool[0])
+
