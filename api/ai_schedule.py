@@ -65,7 +65,8 @@ def get_schedule():
      return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
    sem_left = request.json["sems_left"]
    selected_recs = request.json["selected_recs"]
-   schedule = get_following_classes(sem_left, selected_recs)
+   taken_courses = request.json["taken_courses"]
+   schedule = get_following_classes(sem_left, selected_recs, taken_courses)
    return make_response(jsonify(schedule), HTTPStatus.OK)
 
 if __name__ == "__main__":

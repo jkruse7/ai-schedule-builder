@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import "../App.css";
 
-function ScheduleDisplay({ selectedRecs, semsLeft }) {
+function ScheduleDisplay({ selectedRecs, semsLeft, selectedCourses }) {
 
   const [schedule, setSchedule] = useState([]);
 
@@ -35,7 +35,8 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
   useEffect(() => {
     const scheduleBody = JSON.stringify({
       "selected_recs": selectedRecs,
-      "sems_left": semsLeft
+      "sems_left": semsLeft,
+      "taken_courses": selectedCourses
     });
     fetch("http://localhost:5000/ai-schedule-builder/api/get/schedule", {
       method: 'POST',

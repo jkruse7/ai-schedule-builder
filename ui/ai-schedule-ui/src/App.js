@@ -53,6 +53,7 @@ function App() {
         <ScheduleDisplay
           selectedRecs={selectedRecs}
           semsLeft={semsLeft}
+          selectedCourses={selectedCourses}
         />
       </div>
     )
