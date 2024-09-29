@@ -18,10 +18,10 @@ function SelectableListItem({ course, selectedCourses, setSelectedCourses }) {
   
   return (
     <li>
-        {added === false 
-          ? <button onClick={addToList}>Add</button>
-          : <button onClick={addToList}>Remove</button>
-        }
+        <input
+            type="checkbox"
+            onChange={() => addToList()}
+        />
         <label>{course.subject_code}{course.course_key} {course.course_title}</label>
     </li>
   );
