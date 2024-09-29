@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 
-function StudentInputs({ setCourses, selectedCourses }) {
-  const [major, setMajor] = useState("");
-  const [semsLeft, setSemsLeft] = useState("");
+function StudentInputs({ setCourses, selectedCourses, major, setMajor, semsLeft, setSemsLeft }) {
   const [error, setError] = useState(null);
 
   const prevMajor = useRef("");

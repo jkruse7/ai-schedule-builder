@@ -61,12 +61,12 @@ def get_recommendations():
 def get_schedule():
    if request.method == "OPTIONS":
     return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
-   if not request.json["sem_left"] or not request.json["selected_recs"]:
+   if not request.json["sems_left"] or not request.json["selected_recs"]:
      return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
-   sem_left = request.json["sem_left"]
+   sem_left = request.json["sems_left"]
    selected_recs = request.json["selected_recs"]
    schedule = get_following_classes(sem_left, selected_recs)
-   return schedule
+   return make_response(jsonify(schedule), HTTPStatus.OK)
 
 if __name__ == "__main__":
   app.run(debug=True, port=5000)
