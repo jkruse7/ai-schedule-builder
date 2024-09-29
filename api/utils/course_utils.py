@@ -6,7 +6,7 @@ from pittapi import course
 import os
 import google.generativeai as genai
 from pymongo import MongoClient
-from rmp_code import get_prof_difficulty_average
+from .rmp_code import get_prof_difficulty_average
 
 # Replace <connection_string> with your MongoDB connection string
 client = MongoClient("mongodb+srv://ruh32:MUKYGIasKz8Bc4rn@aischedulebuilder.hfmwv.mongodb.net/?retryWrites=true&w=majority&appName=AIScheduleBuilder")
@@ -58,7 +58,7 @@ def ask_gemini_for_recs(answers:List[str], response: str, class_list: dict[str, 
         full += s + " , "
     if (response + full) in recommendations_cache:
         return recommendations_cache[response + full]
-    gemini_response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take? Return only the class names in the format 'CS 0007 Introduction to Computer Programming', with each class seperated by a new line. Do not return any text besides the classes and limit your recomendations to 10 classes.")
+    gemini_response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take? Only recommend class numbers higher than 1502. Return only the class names in the format 'CS 0007 Introduction to Computer Programming', with each class seperated by a new line. Do not return any text besides the classes and limit your recomendations to 10 classes.")
     recommendations_cache[response + full] = gemini_response.text
     print(gemini_response.text)
     return gemini_response.text
@@ -105,7 +105,7 @@ def get_courses_by_subject(major: str):
     # filter it to be just undergrad courses
     all = []
     for c in formatted:  # Assuming courses_taken is a list of dicts
-        if int(c["course_number"]) >= 1503 and int(c["course_number"]) <= 1900:
+        if int(c["course_number"]) <= 1900:
             all.append(c)
     major_courses_cache[major] = all
     
