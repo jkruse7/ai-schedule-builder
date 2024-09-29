@@ -23,6 +23,7 @@ function CourseRecommendations({ answers, courses, selectedCourses }) {
             return response.json();
         }).then(data => {
             console.warn(data);
+            setRecomendations(data);
         }).catch(error => {
             console.error(error);
         });

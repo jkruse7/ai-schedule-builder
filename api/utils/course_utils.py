@@ -15,6 +15,8 @@ collection = db['Major Requirements']
 genai.configure(api_key="AIzaSyCgKFCeZ3CUrb62iwvzwdmw-v5pv5ylSpg")
 
 major_courses_cache = {}
+questions_cache = {}
+recommendations_cache = {}
 
 # Create the model
 generation_config = {
@@ -38,8 +40,10 @@ chat_session = model.start_chat(
 
 
 def ask_gemini_to_generate_questions(all_courses: dict[str, str], courses_taken:dict[str, str]):
-    total_courses = str(all_courses) # convert to string all classes
     taken = str(courses_taken) # convert to string courses taken
+    if taken in questions_cache:
+        return questions_cache[taken]
+    total_courses = str(all_courses) # convert to string all classes
     response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes? FOr your response, return each question in plain text, with a new line in between each question.") # sending in classes already taken, course details, as a string
     print(response.text)
     return response.text

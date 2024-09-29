@@ -42,20 +42,20 @@ def get_questions():
 
 @app.route("/ai-schedule-builder/api/get/recommendations", methods=["POST"])
 def get_recommendations():
+   print("mogdo")
    if request.method == "OPTIONS":
     return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
    if not request.json["taken_courses"] or not request.json["class_list"] or not request.json["q_and_a"]:
      return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
    q_and_a = request.json["q_and_a"]
    full_questions = ""
-   for question in q_and_a:
-      full_questions += question
-   answers = q_and_a.items()
+   answers = []
+   for item in q_and_a:
+      full_questions += item['question']
+      answers.append(item['answer'])
    class_list = request.json["class_list"]
    taken_courses = request.json["taken_courses"]
    recommendations = ask_gemini_for_recs(answers, full_questions, class_list, taken_courses)
-   print('ayo')
-   print(recommendations)
    return make_response(jsonify(recommendations), HTTPStatus.OK)
 
 if __name__ == "__main__":
