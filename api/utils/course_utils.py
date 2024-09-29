@@ -85,11 +85,9 @@ def get_average_difficulty(classes_selected: dict): # hella slow.
     return(average_list)
 
 def get_following_classes(sems_left: str, classes_I_want: dict, taken_courses):
-    print('here')
     required = includeRequirements(taken_courses, classes_I_want)
     average = get_average_difficulty(classes_I_want)
-    print(average)
-    response = chat_session.send_message("You are a college counselor. I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it. Your response should be formated as plain text with the semester and a semicolon, class and a semicolon, and explanation. Do not return any more text besides what is requested.")
+    response = chat_session.send_message("You are a college counselor. I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it. As well, these are the required courses I have left to take: " + str(required) + ". Please also add them to the schedule. Your response should be formated as plain text with the semester and a semicolon, class and a semicolon, and explanation. Do not return any more text besides what is requested. Make sure the number of classes is balanced over all the semesters. Make sure you give descriptions for the courses you recommended.")
     print(response.text)
     return response.text
 

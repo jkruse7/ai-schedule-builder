@@ -5,6 +5,7 @@ from flask_cors import CORS
 from http import HTTPStatus
 from utils.course_utils import get_courses_by_subject, get_cached_courses, ask_gemini_to_generate_questions, ask_gemini_for_recs, get_following_classes
 import json
+from gevent.pywsgi import WSGIServer
 
 
 app = Flask(__name__)
@@ -70,5 +71,7 @@ def get_schedule():
    return make_response(jsonify(schedule), HTTPStatus.OK)
 
 if __name__ == "__main__":
-  app.run(debug=True, port=5000)
-  CORS(app=app)
+  # app.run(debug=True, port=5000)
+  # CORS(app=app)
+  http_server = WSGIServer(('0.0.0.0', 5000), app)
+  http_server.serve_forever()

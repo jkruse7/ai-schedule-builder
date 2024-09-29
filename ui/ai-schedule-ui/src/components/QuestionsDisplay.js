@@ -7,6 +7,7 @@ function QuestionsDisplay({courses, selectedCourses, major, setAnswers, setCurSc
     const answers = [];
 
     useEffect(() => {
+        setQuestions([]);
         const questionsBody = JSON.stringify({
             taken_courses: selectedCourses,
             major: major
