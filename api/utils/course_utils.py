@@ -45,6 +45,7 @@ def ask_gemini_to_generate_questions(all_courses: dict[str, str], courses_taken:
         return questions_cache[taken]
     total_courses = str(all_courses) # convert to string all classes
     response = chat_session.send_message("Here are all the courses available to me: " + total_courses + ". Here are all the courses I have taken so far: " + taken + ". Can you generate 5 yes or no questions that gauge my interests for future classes? FOr your response, return each question in plain text, with a new line in between each question.") # sending in classes already taken, course details, as a string
+    questions_cache[taken] = response.text
     print(response.text)
     return response.text
 
@@ -53,7 +54,10 @@ def ask_gemini_for_recs(answers:List[str], response: str, class_list: dict[str, 
     full = ""
     for s in answers:
         full += s + " , "
+    if (response + full) in recommendations_cache:
+        return recommendations_cache[response + full]
     response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take in the format 'CS 0007 Introduction to Computer Programming' /n 'CS 401 Intermediate Programming'?")
+    recommendations_cache[response + full] = response.text
     print(response.text)
     return response.text
 
