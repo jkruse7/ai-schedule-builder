@@ -12,6 +12,7 @@ function App() {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [curScreen, setCurScreen] = useState("HOME");
   const [answers, setAnswers] = useState([]);
+  const [selectedRecs, setSelectedRecs] = useState([]);
 
   const changeScreen = (type) => {
     setCurScreen(type)
@@ -27,9 +28,17 @@ function App() {
   else if (curScreen === "COURSES") {
     return (
       <div>
-        <CourseRecommendations answers={answers} courses={courses} selectedCourses={selectedCourses}/>
+        <CourseRecommendations answers={answers} courses={courses} selectedCourses={selectedCourses} setSelectedRecs={setSelectedRecs} setCurScreen={setCurScreen}/>
       </div>
     );
+  }
+  else if (curScreen === "SCHEDULE") {
+
+    return (
+      <div>
+        {/* <ScheduleDisplay/> */}
+      </div>
+    )
   }
 
   return (

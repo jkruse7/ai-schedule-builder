@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-function CourseRecommendations({ answers, courses, selectedCourses }) {
+function CourseRecommendations({ answers, courses, selectedCourses, setSelectedRecs, setCurScreen }) {
     const [recomendations, setRecomendations] = useState("");
+    const rec_answers = [];
     
     useEffect(() => {
         const recBody = JSON.stringify({
@@ -30,11 +31,46 @@ function CourseRecommendations({ answers, courses, selectedCourses }) {
 
     }, [answers]);
 
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.warn(rec_answers);
+        setSelectedRecs(rec_answers);
+        setCurScreen("SCHEDULE");
+    };
+
+    
+    const handleChange = (curR) => {
+        rec_answers.push(
+            curR)
+    };
+
     return (
         <div>
             {recomendations.length === 0 
                 ? <label>Loading...</label>
-                : <label>good shit brother</label>
+                : (
+                    <form onSubmit={handleSubmit}>
+                        <ul>
+                            {recomendations.map(curR => {
+                                return (
+                                    <li key={curR}>
+                                        <div> 
+                                            <input
+                                                type="checkbox"
+                                                name={curR}
+                                                value={curR}
+                                                onChange={() => handleChange(curR)}
+                                            />
+                                            <label>{curR}</label>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        <button type="submit">Submit All Answers</button>
+                    </form>
+                )
             }
         </div>
     );
