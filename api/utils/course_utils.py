@@ -119,6 +119,27 @@ def filtered_courses(courses:dict[str, course.Course]) -> List[str]:
         parsed_courses[key] = (f"{course.subject_code} {course.course_number} {course.course_title}")
     return parsed_courses
 
+def is_in_class_selected(classes_selected: list[dict[str, str]], class_list:str):
+        for classy in classes_selected:
+            try:
+                if classy['course_number'] == class_list:
+                    print(class_list)
+                    print(classy['course_number'])
+                    return False
+            except: 
+                classy.split(" ")
+                if classy[1] == class_list:
+                    return False
+        return True
+       
+        
+def is_in_class_taken(classes_taken: list[dict[str, str]], class_list:str):
+    for classy in classes_taken:
+        if classy['course_number'] == class_list: #in
+            print(class_list)
+            print(classy['course_number'])
+            return False
+    return True
 
 if __name__ == "__main__":
     cool = get_courses_by_subject("CS")
@@ -137,10 +158,24 @@ if __name__ == "__main__":
     #ask_gemini_for_recs(answers, response, all, courses_taken)
 
     # depending on what they select, we call pitt api with those classes to find professor
-    classes_selected = {"subject_code": "CS", "course_number": "1571", "course_id": "105780", "course_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE", "course_key": "1571"}, {"subject_code": "CS", "course_number": "1613", "course_id": "194137", "course_title": "QUANTUM COMPUTATION", "course_key": "1613"}, {"subject_code": "CS", "course_number": "1621", "course_id": "105785", "course_title": "STRUCTURE PROGRAMMING LANGUAGES", "course_key": "1621"}, {"subject_code": "CS", "course_number": "0007", "course_id": "105611", "course_title": "INTRODUCTION TO COMPUTER PROGRAMMING", "course_key": "0007"}
+    classes_selected = [{"subject_code": "CS", "course_number": "1571", "course_id": "105780", "course_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE", "course_key": "1571"}, {"subject_code": "CS", "course_number": "1613", "course_id": "194137", "course_title": "QUANTUM COMPUTATION", "course_key": "1613"}, {"subject_code": "CS", "course_number": "1621", "course_id": "105785", "course_title": "STRUCTURE PROGRAMMING LANGUAGES", "course_key": "1621"}, {"subject_code": "CS", "course_number": "0007", "course_id": "105611", "course_title": "INTRODUCTION TO COMPUTER PROGRAMMING", "course_key": "0007"}]
 
 
     get_following_classes("2", classes_selected)
     
+    print(classes_selected)
+
+    result = collection.find_one({"_id": "66f8a064a9a540a0e41b1abb"})
+    major_docs = collection.find({"Major": "CS"})
+
+    for doc in major_docs:
+        print(doc)
+
+    for classes in doc['Requirements']:
+        class_list = classes.split(" ") # required
+        for courses in courses_taken:
+            if is_in_class_selected(classes_selected, class_list[1]) and is_in_class_taken(courses_taken, class_list[1]): # if it is not in selected class & not in classes taken
+                classes_selected.append(classes) # if they have a class they havent taken thats required we'll automatically add that to the classes they have to take
+                break
     #print(cool[0])
 
