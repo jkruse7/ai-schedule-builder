@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from "react";
+import "../App.css";
 
 function ScheduleDisplay({ selectedRecs, semsLeft }) {
 
@@ -17,12 +18,14 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
     }, {});
 
     return Object.keys(groupedSchedule).map((key, index) => (
-      <div key={index}>
+      <div key={index} className="grid-card">
         <h3>{key}</h3>
         {groupedSchedule[key].map((linePieces, subIndex) => (
           <div key={subIndex}>
-            <label>{linePieces[1]}</label>
-            <label>{linePieces[2]}</label>
+            <h5>{linePieces[1]}</h5>
+            <div>
+              <span>{linePieces[2]}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -56,13 +59,18 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
   }, [selectedRecs])
 
   return (
-    <div>
-      {schedule.length === 0
-        ? <label>Loading...</label>
-        : (
-          <div>{formatSchedule(schedule)}</div>
-        )
-      }
+    <div className="schedule-container">
+      <div className="schedule-header">
+        <h2>Here's my recommendations!</h2>
+      </div>
+      <div className="schedule-grid-conrainer">
+        {schedule.length === 0
+          ? <label>Loading...</label>
+          : (
+            <div className="schedule-grid">{formatSchedule(schedule)}</div>
+          )
+        }
+      </div>
     </div>
   );
 }
