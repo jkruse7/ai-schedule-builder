@@ -43,9 +43,9 @@
   background: royalblue;
   img {
     padding-left: .1em;
-    padding-right: 2em;
-    max-width: 10%;
-    max-height: 10%;
+    padding-right: 1em;
+    max-width: 7em;
+    max-height: 7em;
   }
   .app-header-title {
     color: white;
@@ -124,6 +124,10 @@
 }
 button:hover {
   background-color: #d4af37;
+}
+
+.courselist-container {
+  display: inline;
 }
 .home-input{
   font-size: 18px;
