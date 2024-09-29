@@ -56,10 +56,10 @@ def ask_gemini_for_recs(answers:List[str], response: str, class_list: dict[str, 
         full += s + " , "
     if (response + full) in recommendations_cache:
         return recommendations_cache[response + full]
-    response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take in the format 'CS 0007 Introduction to Computer Programming' /n 'CS 401 Intermediate Programming'?")
-    recommendations_cache[response + full] = response.text
-    print(response.text)
-    return response.text
+    gemini_response = chat_session.send_message("Here are the questions I was asked: " + response + ". Here are my answers to the question: " + full + ". Here are the classes available: " + str(class_list) + ". Here are the classes I have already taken: " + str(courses_taken) + ". Can you give me a list of classes that I am best suited to take in the format 'CS 0007 Introduction to Computer Programming' /n 'CS 401 Intermediate Programming'?")
+    recommendations_cache[response + full] = gemini_response.text
+    print(gemini_response.text)
+    return gemini_response.text
 
 def get_average_difficulty(classes_selected: dict): # hella slow.
     full_list = []
