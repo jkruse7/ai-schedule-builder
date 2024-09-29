@@ -5,7 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'PittAPI'))
 from pittapi import course
 import os
 import google.generativeai as genai
-import rmp_code
 from pymongo import MongoClient
 
 # Replace <connection_string> with your MongoDB connection string
