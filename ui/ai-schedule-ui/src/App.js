@@ -70,19 +70,19 @@ function App() {
        
        </div>
        <div className='questions'>
-      
-       <StudentInputs 
-        setCourses={setCourses}
-        selectedCourse={selectedCourses}
-        major={major}
-        setMajor={setMajor}
-        semsLeft={semsLeft}
-        setSemsLeft={setSemsLeft}
-       />
-      {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
-       {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
-       </div>
-       
+        <StudentInputs 
+          setCourses={setCourses}
+          selectedCourse={selectedCourses}
+          major={major}
+          setMajor={setMajor}
+          semsLeft={semsLeft}
+          setSemsLeft={setSemsLeft}
+        />
+        {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
+        </div>
+        <div className='courselist-container'>
+          {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
+        </div>
     </div>
   );
 }

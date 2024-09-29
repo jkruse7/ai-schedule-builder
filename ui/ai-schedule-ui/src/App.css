@@ -92,7 +92,7 @@
 }
 .questions{
 
-  padding-left: 40%;
+  /* padding-left: 40%; */
 }
 .special-side {
   text-align: left;
@@ -127,7 +127,8 @@ button:hover {
 }
 
 .courselist-container {
-  display: inline;
+  display: flex;
+  justify-content: center;
 }
 .home-input{
   font-size: 18px;
