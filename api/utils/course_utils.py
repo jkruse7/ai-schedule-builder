@@ -6,7 +6,7 @@ from pittapi import course
 import os
 import google.generativeai as genai
 from pymongo import MongoClient
-from rmp_code import get_prof_difficulty_average
+from .rmp_code import get_prof_difficulty_average
 
 # Replace <connection_string> with your MongoDB connection string
 client = MongoClient("mongodb+srv://ruh32:MUKYGIasKz8Bc4rn@aischedulebuilder.hfmwv.mongodb.net/?retryWrites=true&w=majority&appName=AIScheduleBuilder")
@@ -90,7 +90,7 @@ def get_average_difficulty(classes_selected: dict): # hella slow.
 def get_following_classes(sems_left: str, classes_I_want: dict):
     average = get_average_difficulty(classes_I_want)
     print(average)
-    response = chat_session.send_message("You are a college counselor. I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it. Your response should be formated as plain text with the semester and a semicolon, class and a semicolon, and explanation.")
+    response = chat_session.send_message("You are a college counselor. I have " + sems_left + " semesters left. These are the classes I want to take " + str(classes_I_want) + " and this is their difficulty " + str(average) + " What classes should I take to ensure I do not burn out? Please only give me a list of them and tell me which semester I should do it. Your response should be formated as plain text with the semester and a semicolon, class and a semicolon, and explanation. Do not return any more text besides what is requested.")
     print(response.text)
     return response.text
 

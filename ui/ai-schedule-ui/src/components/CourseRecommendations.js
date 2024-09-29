@@ -23,6 +23,7 @@ function CourseRecommendations({ answers, courses, selectedCourses, setSelectedR
             }
             return response.json();
         }).then(data => {
+            console.warn("unfort");
             console.warn(data);
             const recsArray = data.trim().split("\n");
             setRecomendations(recsArray);

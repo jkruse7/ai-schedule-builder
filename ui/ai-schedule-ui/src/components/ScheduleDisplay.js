@@ -4,6 +4,31 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
 
   const [schedule, setSchedule] = useState([]);
 
+  const formatSchedule = (curSchedule) => {
+
+    const groupedSchedule = curSchedule.reduce((acc, line) => {
+      const linePieces = line.split(';');
+      const key = linePieces[0];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(linePieces);
+      return acc;
+    }, {});
+
+    return Object.keys(groupedSchedule).map((key, index) => (
+      <div key={index}>
+        <h3>{key}</h3>
+        {groupedSchedule[key].map((linePieces, subIndex) => (
+          <div key={subIndex}>
+            <label>{linePieces[1]}</label>
+            <label>{linePieces[2]}</label>
+          </div>
+        ))}
+      </div>
+    ));
+  };
+
   useEffect(() => {
     const scheduleBody = JSON.stringify({
       "selected_recs": selectedRecs,
@@ -22,14 +47,12 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
       }
       return response.json();
     }).then(data => {
-        console.warn(data);
-        console.warn(typeof data);
-        data.trim().split("\n").forEach(sem => schedule.push(sem));
-        console.warn(schedule);
+      console.warn("unfort");
+      console.warn(data.trim().split("\n"));
+      setSchedule(data.trim().split("\n"));
     }).catch(error => {
         console.error(error);
     });
-
   }, [selectedRecs])
 
   return (
@@ -37,11 +60,7 @@ function ScheduleDisplay({ selectedRecs, semsLeft }) {
       {schedule.length === 0
         ? <label>Loading...</label>
         : (
-          <div>
-            {schedule.map(cur => {
-              <div>{cur}</div>
-            })}
-          </div>
+          <div>{formatSchedule(schedule)}</div>
         )
       }
     </div>
