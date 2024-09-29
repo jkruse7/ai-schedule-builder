@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import SelectableListItem from "./SelectedableListItem";
+import '../App.css';
 
 function CoursesList({ courses, selectedCourses, setSelectedCourses }) {
 
@@ -9,9 +10,11 @@ function CoursesList({ courses, selectedCourses, setSelectedCourses }) {
   }
 
   return (
-    <ul>
-      {courses.map(course => <SelectableListItem course={course} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>)}
-    </ul>
+    <div className="courselist-container">
+      <ul>
+        {courses.map(course => <SelectableListItem course={course} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>)}
+      </ul>
+    </div>
   );
 }
 

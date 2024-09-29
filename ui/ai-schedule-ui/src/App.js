@@ -24,6 +24,10 @@ function App() {
   if (curScreen === "QUESTIONS") {
     return (
       <div>
+        <header className='app-header'>
+          <img src={logo}/>
+          <h1 className='app-header-title'>AL-Genda</h1>
+        </header>
         <QuestionsDisplay courses={courses} selectedCourses={selectedCourses} major={major} setAnswers={setAnswers} setCurScreen={setCurScreen}/>
       </div>
     );
@@ -31,6 +35,10 @@ function App() {
   else if (curScreen === "COURSES") {
     return (
       <div>
+        <header className='app-header'>
+          <img src={logo}/>
+          <h1 className='app-header-title'>AL-Genda</h1>
+        </header>
         <CourseRecommendations answers={answers} courses={courses} selectedCourses={selectedCourses} setSelectedRecs={setSelectedRecs} setCurScreen={setCurScreen}/>
       </div>
     );
@@ -40,6 +48,7 @@ function App() {
       <div>
         <header className='app-header'>
           <img src={logo}/>
+          <h1 className='app-header-title'>AL-Genda</h1>
         </header>
         <ScheduleDisplay
           selectedRecs={selectedRecs}
@@ -50,7 +59,6 @@ function App() {
   }
 
   return (
-    
     <div className='main-container'>
       <header className='app-header'>
         <img src={logo}/>
