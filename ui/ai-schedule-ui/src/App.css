@@ -117,7 +117,8 @@ button:hover {
 }
 
 .courselist-container {
-  display: inline;
+  display: flex;
+  justify-content: center;
 }
 .home-input{
   font-size: 18px;

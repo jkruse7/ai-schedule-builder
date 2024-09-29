@@ -70,19 +70,19 @@ function App() {
        <p className = 'home-page-grid'>After giving AIgenda your major, the semesters you have left, and the classes you have already taken, AIgenda generates questions for you to answer to gauge your interests. Once hearing from you, AIgenda, outputs a list of recommended classes you can take. After you select those that interest you, AIgenda clusters those classes into different semesters based on the difficulty of the class and the time you have left. </p>
        </div>
        <div className='questions'>
-      
-       <StudentInputs 
-        setCourses={setCourses}
-        selectedCourse={selectedCourses}
-        major={major}
-        setMajor={setMajor}
-        semsLeft={semsLeft}
-        setSemsLeft={setSemsLeft}
-       />
-      {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
-       {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
-       </div>
-       
+        <StudentInputs 
+          setCourses={setCourses}
+          selectedCourse={selectedCourses}
+          major={major}
+          setMajor={setMajor}
+          semsLeft={semsLeft}
+          setSemsLeft={setSemsLeft}
+        />
+        {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
+        </div>
+        <div className='courselist-container'>
+          {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
+        </div>
     </div>
   );
 }
