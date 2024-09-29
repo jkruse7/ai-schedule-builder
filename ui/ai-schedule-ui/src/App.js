@@ -52,6 +52,10 @@ function App() {
   return (
     
     <div className='main-container'>
+      <header className='app-header'>
+        <img src={logo}/>
+        <h1 className='app-header-title'>AL-Genda</h1>
+      </header>
       <div className='header'>
        <h1>Hi! I'm Al!</h1><br/>
        <h3>I will be your trusty guide to naviagting Pitt classes</h3>
@@ -60,10 +64,7 @@ function App() {
        
        </div>
        <div className='questions'>
-      <header className='app-header'>
-        <img src={logo}/>
-        <h1 className='app-header-title'>AL-Genda</h1>
-      </header>
+      
        <StudentInputs 
         setCourses={setCourses}
         selectedCourse={selectedCourses}
