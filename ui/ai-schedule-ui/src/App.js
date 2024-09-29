@@ -67,17 +67,20 @@ function App() {
       <div className='header'>
        <h1>Hi! I'm Al!</h1>
        <h3>I will be your trusty guide to navigating Pitt classes</h3>
-       <p className = 'home-page-grid'>After giving AIgenda your major, the semesters you have left, and the classes you have already taken, AIgenda generates questions for you to answer to gauge your interests. Once hearing from you, AIgenda, outputs a list of recommended classes you can take. After you select those that interest you, AIgenda clusters those classes into different semesters based on the difficulty of the class and the time you have left. </p>
-       </div>
-       <div className='questions'>
-        <StudentInputs 
+       <div className='home-page-grid'>
+        <p>After giving AIgenda your major, the semesters you have left, and the classes you have already taken, AIgenda generates questions for you to answer to gauge your interests. Once hearing from you, AIgenda, outputs a list of recommended classes you can take. After you select those that interest you, AIgenda clusters those classes into different semesters based on the difficulty of the class and the time you have left. </p>
+        
+         <div className='questions'>
+          <StudentInputs 
           setCourses={setCourses}
           selectedCourse={selectedCourses}
           major={major}
           setMajor={setMajor}
           semsLeft={semsLeft}
           setSemsLeft={setSemsLeft}
-        />
+          />
+         </div>
+        </div>
         {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
         </div>
         <div className='courselist-container'>

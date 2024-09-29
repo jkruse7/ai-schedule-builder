@@ -46,9 +46,9 @@ function StudentInputs({ setCourses, selectedCourses, major, setMajor, semsLeft,
   };
 
   return (
-    <div className='home-page-grid'>
+    <div>
       <form onSubmit={handleSubmit}>
-        <div className="home-input">
+        <div className="home-input-labels">
         <label>What is your major?&emsp;   
           <input
             type="text"
