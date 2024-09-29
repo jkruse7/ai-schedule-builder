@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_cors import CORS
 from http import HTTPStatus
-from utils.course_utils import get_courses_by_subject, get_cached_courses, ask_gemini_to_generate_questions, ask_gemini_for_recs
+from utils.course_utils import get_courses_by_subject, get_cached_courses, ask_gemini_to_generate_questions, ask_gemini_for_recs, get_following_classes
 import json
 
 
@@ -56,6 +56,17 @@ def get_recommendations():
    taken_courses = request.json["taken_courses"]
    recommendations = ask_gemini_for_recs(answers, full_questions, class_list, taken_courses)
    return make_response(jsonify(recommendations), HTTPStatus.OK)
+
+@app.route("/ai-schedule-builder/api/get/schedule", methods=["POST"])
+def get_schedule():
+   if request.method == "OPTIONS":
+    return make_response(jsonify({"message": "CORS preflight"}), HTTPStatus.OK)
+   if not request.json["sem_left"] or not request.json["selected_recs"]:
+     return make_response(jsonify({"error": "Not enough parameter"}), HTTPStatus.BAD_REQUEST)
+   sem_left = request.json["sem_left"]
+   selected_recs = request.json["selected_recs"]
+   schedule = get_following_classes(sem_left, selected_recs)
+   return schedule
 
 if __name__ == "__main__":
   app.run(debug=True, port=5000)
