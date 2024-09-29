@@ -1,3 +1,4 @@
+import '../App.css';
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 
@@ -47,24 +48,27 @@ function StudentInputs({ setCourses, selectedCourses, major, setMajor, semsLeft,
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>What is your major?
+        <label>What is your major?&emsp;   
           <input
             type="text"
             value={major}
             onChange={(e) => setMajor(e.target.value)}
           />
+          <br></br>
         </label>
-        <label>How many semesters do you have left?
+        <label>How many semesters do you have left?&emsp;
           <input
             type="number"
             value={semsLeft}
             onChange={(e) => setSemsLeft(e.target.value)}
           />
+          <br></br>
         </label>
-        <button type="submit">Submit</button>
+        <button className='submit-btn' type="submit">Submit</button>
         {error !== null && <label>Error: {error}</label>}
       </form>
-      <button onClick={resetInputs}>Reset Inputs</button>
+      <br/>
+      <button className='reset-btn' onClick={resetInputs}>Reset Inputs</button>
     </div>
   );
 }

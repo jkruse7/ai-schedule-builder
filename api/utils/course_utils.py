@@ -6,7 +6,7 @@ from pittapi import course
 import os
 import google.generativeai as genai
 from pymongo import MongoClient
-from rmp_code import get_prof_difficulty_average
+from .rmp_code import get_prof_difficulty_average
 
 # Replace <connection_string> with your MongoDB connection string
 client = MongoClient("mongodb+srv://ruh32:MUKYGIasKz8Bc4rn@aischedulebuilder.hfmwv.mongodb.net/?retryWrites=true&w=majority&appName=AIScheduleBuilder")

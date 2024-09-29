@@ -46,7 +46,16 @@ function App() {
   }
 
   return (
-    <div>
+    
+    <div className='main-container'>
+      <div className='header'>
+       <h1>Hi! I'm Al!</h1><br/>
+       <h3>I will be your trusty guide to naviagting Pitt classes</h3>
+       <p>This is what this does ....</p>
+       <div className='special-side'><h2>Get Started!</h2></div>
+       
+       </div>
+       <div className='questions'>
        <StudentInputs 
         setCourses={setCourses}
         selectedCourse={selectedCourses}
@@ -57,6 +66,8 @@ function App() {
        />
       {selectedCourses.length != 0 && <button id='generate-questions' onClick={()=>changeScreen("QUESTIONS")}>Generate Questions</button>}
        {courses.length > 0 && <CoursesList courses={courses} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>}
+       </div>
+       
     </div>
   );
 }
