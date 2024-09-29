@@ -3,15 +3,15 @@ import os
 from typing import List
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'PittAPI'))
 from pittapi import course
-
-# cs_subject = course.get_subject_courses(subject='CS')
-# courses_dict = cs_subject.courses # subject code, dictionary of courses
-
-# parsed_courses = filtered_courses(courses_dict)
-# print(parsed_courses)
 import os
 import google.generativeai as genai
 import rmp_code
+from pymongo import MongoClient
+
+# Replace <connection_string> with your MongoDB connection string
+client = MongoClient("mongodb+srv://ruh32:MUKYGIasKz8Bc4rn@aischedulebuilder.hfmwv.mongodb.net/?retryWrites=true&w=majority&appName=AIScheduleBuilder")
+db = client['AIScheduleBuilder']
+collection = db['Major Requirements']
 
 genai.configure(api_key="AIzaSyCgKFCeZ3CUrb62iwvzwdmw-v5pv5ylSpg")
 
@@ -131,6 +131,6 @@ if __name__ == "__main__":
     classes_selected = {"subject_code": "CS", "course_number": "1571", "course_id": "105780", "course_title": "INTRODUCTION TO ARTIFICIAL INTELLIGENCE", "course_key": "1571"}, {"subject_code": "CS", "course_number": "1613", "course_id": "194137", "course_title": "QUANTUM COMPUTATION", "course_key": "1613"}, {"subject_code": "CS", "course_number": "1621", "course_id": "105785", "course_title": "STRUCTURE PROGRAMMING LANGUAGES", "course_key": "1621"}, {"subject_code": "CS", "course_number": "0007", "course_id": "105611", "course_title": "INTRODUCTION TO COMPUTER PROGRAMMING", "course_key": "0007"}
 
 
-    get_following_classes("2", classes_selected)
-    # then with the professor names as a list we call the get difficulty average method
+    #get_following_classes("2", classes_selected)
+    
     #print(cool[0])
