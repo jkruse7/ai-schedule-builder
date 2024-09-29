@@ -57,10 +57,8 @@ function App() {
         <h1 className='app-header-title'>AL-Genda</h1>
       </header>
       <div className='header'>
-       <h1>Hi! I'm Al!</h1><br/>
-       <h3>I will be your trusty guide to naviagting Pitt classes</h3>
-       <p>This is what this does ....</p>
-       <div className='special-side'><h2>Get Started!</h2></div>
+       <h1>Hi! I'm Al!</h1>
+       <h3>I will be your trusty guide to navigating Pitt classes</h3>
        
        </div>
        <div className='questions'>

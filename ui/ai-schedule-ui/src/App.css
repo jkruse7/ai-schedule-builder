@@ -98,15 +98,6 @@
   text-align: left;
   padding-left: 20%;
 }
-h2:after {
-  display: inline-block;
-  content: "";
-  height: 2px;
-  background: black;
-  width: 70%;
-  margin-left: 5px;
-  margin-top: 8px;
-}
 .submit-btn{
   background-color: #FFD700; /* Green */
   border: none;
@@ -133,4 +124,7 @@ h2:after {
 }
 button:hover {
   background-color: #d4af37;
+}
+.home-input{
+  font-size: 18px;
 }

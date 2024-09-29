@@ -48,6 +48,7 @@ function StudentInputs({ setCourses, selectedCourses, major, setMajor, semsLeft,
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <div className="home-input">
         <label>What is your major?&emsp;   
           <input
             type="text"
@@ -62,13 +63,19 @@ function StudentInputs({ setCourses, selectedCourses, major, setMajor, semsLeft,
             value={semsLeft}
             onChange={(e) => setSemsLeft(e.target.value)}
           />
+          
           <br></br>
         </label>
+        </div>
+        <div className="home-button">
         <button className='submit-btn' type="submit">Submit</button>
+        </div >
         {error !== null && <label>Error: {error}</label>}
       </form>
       <br/>
+      <div className="home-button">
       <button className='reset-btn' onClick={resetInputs}>Reset Inputs</button>
+      </div>
     </div>
   );
 }
